@@ -46,7 +46,7 @@
 
         <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             @foreach ($types as $type)
-                <x-type-card :type="$type" />
+                <x-type-card :type="$type" :index="$loop->iteration" />
             @endforeach
         </div>
     </div>

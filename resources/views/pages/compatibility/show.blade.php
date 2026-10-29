@@ -24,7 +24,7 @@
                     <div class="mt-6 flex flex-wrap gap-2">
                         <span class="chip-lilac">{{ $pair['label'] }}</span>
                         @foreach ($overlap['shared'] as $letter)
-                            <span class="chip-mint">Sama: {{ $letter }}</span>
+                            <span class="chip-lilac">Sama: {{ $letter }}</span>
                         @endforeach
                         @foreach ($overlap['different'] as $difference)
                             <span class="chip-blush">Beda: {{ $difference }}</span>
@@ -51,7 +51,7 @@
                 <article class="surface p-6 sm:p-7">
                     <div class="flex items-start justify-between gap-3">
                         <div>
-                            <p class="text-sm font-bold tracking-[0.2em]" style="color: {{ $type->accent_color }}">{{ $type->code }}</p>
+                            <p class="text-sm font-bold tracking-[0.2em]" style="color: {{ $type->tonePalette()['deep'] }}">{{ $type->code }}</p>
                             <h2 class="heading-md mt-2">{{ $type->title }}</h2>
                             <p class="mt-1 text-[0.7rem] font-medium tracking-[0.16em] text-ink-muted uppercase">{{ $type->alias }}</p>
                         </div>

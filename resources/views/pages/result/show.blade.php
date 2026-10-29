@@ -4,7 +4,8 @@
 @section('robots', 'noindex, nofollow')
 
 @php
-    $accents = ['EI' => 'lilac', 'SN' => 'sky', 'TF' => 'blush', 'JP' => 'mint'];
+    $accents = ['EI' => 'lilac', 'SN' => 'sky', 'TF' => 'blush', 'JP' => 'ink'];
+    $tone = $type?->tonePalette() ?? config('mbti.palette.tones.lilac');
 @endphp
 
 @section('content')
@@ -30,23 +31,27 @@
             </div>
         </div>
 
-        <section class="surface relative mt-8 overflow-hidden p-7 sm:p-9">
-            <div class="absolute -top-24 -right-16 h-64 w-64 rounded-full opacity-40 blur-2xl"
-                 style="background: {{ $type?->accent_color ?? '#A78BFA' }}"></div>
+        <section class="surface relative mt-8 overflow-hidden">
+            <div class="absolute inset-0" style="background: linear-gradient(135deg, {{ $tone['soft'] }} 0%, #FFFFFF 62%);"></div>
+            <div class="decor-dots pointer-events-none absolute inset-0 opacity-25" aria-hidden="true"></div>
+            <div class="pointer-events-none absolute -top-24 -right-16 h-64 w-64 rounded-full"
+                 style="background: {{ $tone['base'] }}; opacity: 0.4;" aria-hidden="true"></div>
 
-            <div class="relative grid gap-8 lg:grid-cols-[auto_1fr] lg:items-start">
+            <div class="relative flex flex-col gap-8 p-7 sm:p-9 lg:flex-row lg:items-center lg:justify-between">
                 <div class="flex flex-col items-start gap-3">
-                    <span class="text-6xl font-bold tracking-tight sm:text-7xl"
-                          style="color: {{ $type?->accent_color ?? '#A78BFA' }}">
+                    <span class="text-6xl font-bold tracking-tight sm:text-7xl" style="color: {{ $tone['deep'] }};">
                         {{ $result->final_mbti }}
                     </span>
                     <span class="chip-lilac">Kekuatan sinyal {{ $result->clarity }}%</span>
+                    @if ($type)
+                        <x-chibi :type="$type" :size="132" />
+                    @endif
                 </div>
 
-                <div>
+                <div class="max-w-2xl">
                     <h2 class="heading-lg">{{ $type?->title ?? 'Tipe '.$result->final_mbti }}</h2>
                     <p class="mt-1 text-xs font-semibold tracking-[0.18em] text-ink-muted uppercase">{{ $type?->alias }}</p>
-                    <p class="prose-soft mt-4 max-w-2xl">{{ $type?->description }}</p>
+                    <p class="prose-soft mt-4">{{ $type?->description }}</p>
 
                     <div class="mt-5 flex flex-wrap gap-2">
                         @foreach ($breakdown as $dimension => $data)
@@ -55,7 +60,7 @@
                                 'bg-lilac-soft' => $accents[$dimension] === 'lilac',
                                 'bg-sky-soft' => $accents[$dimension] === 'sky',
                                 'bg-blush-soft' => $accents[$dimension] === 'blush',
-                                'bg-mint-soft' => $accents[$dimension] === 'mint',
+                                'bg-ink/5' => $accents[$dimension] === 'ink',
                                 'text-ink',
                             ])>
                                 {{ $data['left'] }}{{ $data['left_score'] }} /
@@ -100,7 +105,7 @@
                     <ul class="mt-4 space-y-2.5">
                         @foreach ($type?->strengths ?? [] as $strength)
                             <li class="flex gap-3 text-sm text-ink-soft">
-                                <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-mint"></span>
+                                <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sky"></span>
                                 <span>{{ $strength }}</span>
                             </li>
                         @endforeach

@@ -52,6 +52,41 @@ class MbtiType extends Model
     }
 
     /**
+     * Chibi definition backing this type's inline illustration.
+     *
+     * @return array{tone: string, hair: string, hair_style: string, outfit: string, prop: string, glasses: bool, skin: string}
+     */
+    public function chibi(): array
+    {
+        return config("mbti.chibi.types.{$this->code}", config('mbti.chibi.fallback'));
+    }
+
+    public function tone(): string
+    {
+        return $this->chibi()['tone'];
+    }
+
+    /**
+     * Pastel shades derived from the type's tone.
+     *
+     * @return array{base: string, soft: string, deep: string}
+     */
+    public function tonePalette(): array
+    {
+        return config("mbti.palette.tones.{$this->tone()}", config('mbti.palette.tones.lilac'));
+    }
+
+    public function toneBase(): string
+    {
+        return $this->tonePalette()['base'];
+    }
+
+    public function toneSoft(): string
+    {
+        return $this->tonePalette()['soft'];
+    }
+
+    /**
      * @return array{code: string, score: int, label: string, note: string}|null
      */
     public function compatibilityWith(string $code): ?array

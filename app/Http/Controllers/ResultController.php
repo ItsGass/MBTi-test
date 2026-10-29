@@ -23,15 +23,22 @@ class ResultController extends Controller
         ]);
     }
 
-    public function certificate(UserTest $userTest): View
+    public function certificate(UserTest $userTest, CompatibilityMatcher $matcher): View
     {
         $result = $userTest->result()->with('mbtiType')->firstOrFail();
+        $type = $result->mbtiType;
 
         return view('pages.result.certificate', [
             'userTest' => $userTest,
             'result' => $result,
-            'type' => $result->mbtiType,
+            'type' => $type,
             'breakdown' => $result->dimensionBreakdown(),
+            'careers' => $type
+                ? collect($type->careers)->take((int) config('mbti.certificate.careers'))
+                : collect(),
+            'matches' => $type
+                ? $matcher->bestMatches($type->code, (int) config('mbti.certificate.matches'))
+                : collect(),
         ]);
     }
 }

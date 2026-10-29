@@ -9,28 +9,36 @@
     @endphp
 
     <div class="shell pt-10">
-        <a href="{{ route('types.index') }}" class="text-xs font-medium text-ink-muted hover:text-ink">← Semua tipe</a>
+        <a href="{{ route('types.index') }}" class="text-xs font-medium text-ink-muted transition-colors hover:text-ink">← Semua tipe</a>
 
-        <section class="surface relative mt-5 overflow-hidden p-7 sm:p-9">
-            <div class="absolute -top-20 -right-16 h-56 w-56 rounded-full opacity-30 blur-2xl"
-                 style="background: {{ $type->accent_color }}"></div>
+        <section class="surface relative mt-5 overflow-hidden">
+            <div class="absolute inset-0"
+                 style="background: linear-gradient(135deg, {{ $type->toneSoft() }} 0%, #FFFFFF 62%);"></div>
+            <div class="decor-dots pointer-events-none absolute inset-0 opacity-25" aria-hidden="true"></div>
+            <div class="pointer-events-none absolute -top-24 -right-20 h-72 w-72 rounded-full"
+                 style="background: {{ $type->toneBase() }}; opacity: 0.45;" aria-hidden="true"></div>
+            <div class="pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-blush/50" aria-hidden="true"></div>
 
-            <div class="relative flex flex-wrap items-start justify-between gap-6">
-                <div>
-                    <span class="text-5xl font-bold tracking-tight sm:text-6xl" style="color: {{ $type->accent_color }}">
+            <div class="relative flex flex-col gap-8 p-7 sm:p-9 lg:flex-row lg:items-center lg:justify-between">
+                <div class="max-w-2xl">
+                    <span class="text-5xl font-bold tracking-tight sm:text-6xl" style="color: {{ $type->tonePalette()['deep'] }};">
                         {{ $type->code }}
                     </span>
                     <h1 class="heading-lg mt-3">{{ $type->title }}</h1>
                     <p class="mt-1 text-xs font-semibold tracking-[0.18em] text-ink-muted uppercase">{{ $type->alias }}</p>
+
+                    <p class="prose-soft mt-5">{{ $type->description }}</p>
+
+                    <div class="mt-6 flex flex-wrap gap-2">
+                        <a href="{{ route('compatibility.index', ['a' => $type->code]) }}" class="btn-secondary text-sm">Cek kecocokan</a>
+                        <a href="{{ route('test.create') }}" class="btn-primary text-sm">Tes dirimu</a>
+                    </div>
                 </div>
 
-                <div class="flex flex-wrap gap-2">
-                    <a href="{{ route('compatibility.index', ['a' => $type->code]) }}" class="btn-secondary text-sm">Cek kecocokan</a>
-                    <a href="{{ route('test.create') }}" class="btn-primary text-sm">Tes dirimu</a>
+                <div class="flex justify-center lg:justify-end">
+                    <x-chibi :type="$type" :size="196" :decorative="false" />
                 </div>
             </div>
-
-            <p class="prose-soft relative mt-6 max-w-3xl">{{ $type->description }}</p>
         </section>
 
         <section class="mt-6 grid gap-4 lg:grid-cols-2">
@@ -39,7 +47,7 @@
                 <ul class="mt-4 space-y-2.5">
                     @foreach ($type->strengths ?? [] as $strength)
                         <li class="flex gap-3 text-sm text-ink-soft">
-                            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-mint"></span>
+                            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sky"></span>
                             <span>{{ $strength }}</span>
                         </li>
                     @endforeach
@@ -99,7 +107,7 @@
             @endforeach
         </div>
 
-        <section class="mt-10 rounded-card border border-lilac/40 bg-gradient-to-br from-lilac-soft/80 via-white to-mint-soft/60 p-8 text-center">
+        <section class="mt-10 rounded-card border border-lilac/40 bg-gradient-to-br from-lilac-soft/80 via-white to-sky-soft/70 p-8 text-center">
             <h2 class="heading-lg">Apakah kamu {{ $type->code }}?</h2>
             <p class="prose-soft mx-auto mt-3 max-w-lg">Ikuti tes untuk melihat persentase dimensimu dan mengunduh sertifikat.</p>
             <a href="{{ route('test.create') }}" class="btn-primary mt-6">Mulai tes</a>
