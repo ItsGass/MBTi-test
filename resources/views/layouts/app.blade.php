@@ -28,14 +28,29 @@
 
     <header class="sticky top-0 z-40 border-b border-line/70 bg-cream/85 backdrop-blur">
         <div class="shell flex h-16 items-center justify-between gap-4">
-            <a href="{{ route('home') }}" class="group flex items-center gap-2.5">
-                <span class="flex h-9 w-9 items-center justify-center rounded-2xl bg-ink text-sm font-semibold text-cream transition-transform duration-300 group-hover:-rotate-6">
-                    M
-                </span>
-                <span class="text-sm font-semibold tracking-tight text-ink">
-                    MBTI <span class="font-normal text-ink-muted">Insight</span>
-                </span>
-            </a>
+            <!-- Logo Kuadran 4 Dimensi MBTI -->
+<a href="{{ route('home') }}" class="flex items-center gap-3 group focus:outline-none">
+    <!-- Icon 4-Quadrant Pastel Box -->
+    <div class="w-10 h-10 rounded-xl bg-white/80 border border-[#2B2D42]/10 shadow-sm flex items-center justify-center p-1.5 transition-transform duration-300 group-hover:scale-105">
+        <div class="grid grid-cols-2 gap-1 w-full h-full">
+            <!-- E/I Dimension (Blush Pink) -->
+            <div class="rounded-md bg-[#FFC8DD] opacity-90 transition-opacity group-hover:opacity-100"></div>
+            <!-- S/N Dimension (Sky Blue) -->
+            <div class="rounded-md bg-[#A2D2FF] opacity-90 transition-opacity group-hover:opacity-100"></div>
+            <!-- T/F Dimension (Soft Lilac) -->
+            <div class="rounded-md bg-[#CDB4DB] opacity-90 transition-opacity group-hover:opacity-100"></div>
+            <!-- J/P Dimension (Soft Mint / Accent) -->
+            <div class="rounded-md bg-[#BDE0FE] opacity-90 transition-opacity group-hover:opacity-100"></div>
+        </div>
+    </div>
+    
+    <!-- Brand Text -->
+    <div class="flex flex-col">
+        <span class="font-bold text-lg tracking-tight text-[#2B2D42] leading-tight flex items-center gap-1">
+            MBTI <span class="text-xs px-2 py-0.5 rounded-full bg-[#CDB4DB]/30 font-medium text-[#2B2D42]">Insight</span>
+        </span>
+    </div>
+</a>
 
             <nav class="hidden items-center gap-1 sm:flex" aria-label="Navigasi utama">
                 <a href="{{ route('home') }}" @class(['nav-link', 'nav-link-active' => request()->routeIs('home')])>Beranda</a>
