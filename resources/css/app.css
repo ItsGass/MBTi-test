@@ -22,6 +22,9 @@
     --color-sky: #a2d2ff;
     --color-sky-soft: #eaf4ff;
     --color-sky-deep: #7fb6ee;
+    --color-mint: #b5e6d3;
+    --color-mint-soft: #eaf9f3;
+    --color-mint-deep: #86c9af;
 
     --color-line: #ede0d8;
 
@@ -159,6 +162,7 @@
     .chip-lilac,
     .chip-blush,
     .chip-sky,
+    .chip-mint,
     .chip-ink {
         @apply inline-flex items-center gap-1.5 rounded-pill px-3 py-1 text-xs font-medium;
     }
@@ -173,6 +177,10 @@
 
     .chip-sky {
         @apply bg-sky-soft text-ink;
+    }
+
+    .chip-mint {
+        @apply bg-mint-soft text-ink;
     }
 
     .chip-ink {

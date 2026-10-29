@@ -13,7 +13,7 @@
         'lilac' => 'bg-lilac',
         'sky' => 'bg-sky',
         'blush' => 'bg-blush',
-        'ink' => 'bg-ink',
+        'mint' => 'bg-mint',
     ];
     $bar = $accents[$accent] ?? $accents['lilac'];
 @endphp

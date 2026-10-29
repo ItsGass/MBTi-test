@@ -102,12 +102,24 @@ test('a type profile labels its chibi for assistive technology', function () {
         ->assertSee('Ilustrasi chibi INTJ Arsitek');
 });
 
+test('the certificate dimension bars follow the site palette', function () {
+    $userTest = completedResult();
+
+    $this->get(route('result.certificate', $userTest))
+        ->assertOk()
+        ->assertSee('background:#FFC8DD;"', false)
+        ->assertSee('background:#A2D2FF;"', false)
+        ->assertSee('background:#CDB4DB;"', false)
+        ->assertSee('background:#B5E6D3;"', false);
+});
+
 test('the palette and certificate dimensions are centralised in config', function () {
     expect(config('mbti.palette.cream'))->toBe('#FFF9F5')
         ->and(config('mbti.palette.ink'))->toBe('#2B2D42')
         ->and(config('mbti.palette.tones.lilac.base'))->toBe('#CDB4DB')
         ->and(config('mbti.palette.tones.blush.base'))->toBe('#FFC8DD')
         ->and(config('mbti.palette.tones.sky.base'))->toBe('#A2D2FF')
+        ->and(config('mbti.palette.tones.mint.base'))->toBe('#B5E6D3')
         ->and(config('mbti.certificate.width'))->toBe(1200)
         ->and(config('mbti.certificate.height'))->toBe(850);
 });

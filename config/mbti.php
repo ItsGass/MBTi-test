@@ -60,6 +60,7 @@ return [
     'dimensions' => [
         'EI' => [
             'label' => 'E / I',
+            'tone' => 'blush',
             'left' => 'E',
             'right' => 'I',
             'title' => 'Sumber Energi',
@@ -71,6 +72,7 @@ return [
         ],
         'SN' => [
             'label' => 'S / N',
+            'tone' => 'sky',
             'left' => 'S',
             'right' => 'N',
             'title' => 'Cara Menyerap Informasi',
@@ -82,6 +84,7 @@ return [
         ],
         'TF' => [
             'label' => 'T / F',
+            'tone' => 'lilac',
             'left' => 'T',
             'right' => 'F',
             'title' => 'Cara Mengambil Keputusan',
@@ -93,6 +96,7 @@ return [
         ],
         'JP' => [
             'label' => 'J / P',
+            'tone' => 'mint',
             'left' => 'J',
             'right' => 'P',
             'title' => 'Gaya Hidup',
@@ -197,6 +201,7 @@ return [
             'lilac' => ['base' => '#CDB4DB', 'soft' => '#F4EDF8', 'deep' => '#A98FBB'],
             'blush' => ['base' => '#FFC8DD', 'soft' => '#FFF0F5', 'deep' => '#E8A8C4'],
             'sky' => ['base' => '#A2D2FF', 'soft' => '#EAF4FF', 'deep' => '#7FB6EE'],
+            'mint' => ['base' => '#B5E6D3', 'soft' => '#EAF9F3', 'deep' => '#86C9AF'],
         ],
     ],
 

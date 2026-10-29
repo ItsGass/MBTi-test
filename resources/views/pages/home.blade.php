@@ -51,10 +51,8 @@
 
                 <ul class="relative mt-5 space-y-3">
                     @foreach (config('mbti.dimensions') as $key => $dimension)
-                        <li class="flex items-start gap-3 rounded-2xl border border-line/70 bg-white/70 p-4 transition-colors duration-300 hover:border-lilac/50">
-                            <span class="flex h-10 w-14 shrink-0 items-center justify-center rounded-xl bg-cream-deep text-sm font-semibold tracking-wider text-ink">
-                                {{ $dimension['label'] }}
-                            </span>
+                        <li class="flex items-start gap-3 rounded-2xl border border-line/70 bg-white/70 p-4 transition-colors duration-300 hover:border-ink/15">
+                            <x-dimension-label :label="$dimension['label']" :tone="$dimension['tone']" />
                             <div>
                                 <p class="text-sm font-semibold text-ink">{{ $dimension['title'] }}</p>
                                 <p class="mt-0.5 text-xs leading-relaxed text-ink-muted">{{ $dimension['description'] }}</p>

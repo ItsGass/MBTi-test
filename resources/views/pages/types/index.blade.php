@@ -28,8 +28,8 @@
         <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             @foreach (config('mbti.dimensions') as $key => $dimension)
                 <div class="surface-muted p-5">
-                    <p class="text-xs font-semibold tracking-[0.18em] text-ink-muted uppercase">{{ $dimension['label'] }}</p>
-                    <p class="heading-md mt-2">{{ $dimension['title'] }}</p>
+                    <x-dimension-label :label="$dimension['label']" :tone="$dimension['tone']" size="sm" />
+                    <p class="heading-md mt-3">{{ $dimension['title'] }}</p>
                     <p class="prose-soft mt-2 text-xs">{{ $dimension['poles'][$dimension['left']] }} · {{ $dimension['poles'][$dimension['right']] }}</p>
                 </div>
             @endforeach

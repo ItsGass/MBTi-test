@@ -11,12 +11,11 @@
     @php
         $palette = config('mbti.palette');
         $tone = $type?->tonePalette() ?? $palette['tones']['lilac'];
-        $dimensionFills = [
-            'EI' => $palette['tones']['lilac']['base'],
-            'SN' => $palette['tones']['sky']['base'],
-            'TF' => $palette['tones']['blush']['base'],
-            'JP' => $palette['ink'],
-        ];
+        $dimensionFills = collect(config('mbti.dimensions'))
+            ->mapWithKeys(fn (array $dimension, string $key): array => [
+                $key => $palette['tones'][$dimension['tone']]['base'] ?? $palette['ink'],
+            ])
+            ->all();
         $careerList = collect($careers ?? [])->take(config('mbti.certificate.careers'));
         $matchList = collect($matches ?? [])->take(config('mbti.certificate.matches'));
     @endphp

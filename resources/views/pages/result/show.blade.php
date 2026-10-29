@@ -4,7 +4,15 @@
 @section('robots', 'noindex, nofollow')
 
 @php
-    $accents = ['EI' => 'lilac', 'SN' => 'sky', 'TF' => 'blush', 'JP' => 'ink'];
+    $accents = collect(config('mbti.dimensions'))
+        ->mapWithKeys(fn (array $dimension, string $key): array => [$key => $dimension['tone']])
+        ->all();
+    $chipBackgrounds = [
+        'lilac' => 'bg-lilac-soft',
+        'sky' => 'bg-sky-soft',
+        'blush' => 'bg-blush-soft',
+        'mint' => 'bg-mint-soft',
+    ];
     $tone = $type?->tonePalette() ?? config('mbti.palette.tones.lilac');
 @endphp
 
@@ -57,11 +65,8 @@
                         @foreach ($breakdown as $dimension => $data)
                             <span @class([
                                 'chip',
-                                'bg-lilac-soft' => $accents[$dimension] === 'lilac',
-                                'bg-sky-soft' => $accents[$dimension] === 'sky',
-                                'bg-blush-soft' => $accents[$dimension] === 'blush',
-                                'bg-ink/5' => $accents[$dimension] === 'ink',
                                 'text-ink',
+                                $chipBackgrounds[$accents[$dimension]] ?? 'bg-cream-deep',
                             ])>
                                 {{ $data['left'] }}{{ $data['left_score'] }} /
                                 {{ $data['right'] }}{{ $data['right_score'] }}
