@@ -1,0 +1,217 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-cream: #fff9f5;
+    --color-cream-deep: #fdf1e7;
+    --color-ink: #2b2d42;
+    --color-ink-soft: #565873;
+    --color-ink-muted: #85879c;
+
+    --color-lilac: #a78bfa;
+    --color-lilac-soft: #efe9fe;
+    --color-blush: #f9a8d4;
+    --color-blush-soft: #fdeaf4;
+    --color-sky: #93c5fd;
+    --color-sky-soft: #e6f0fe;
+    --color-mint: #99e2c4;
+    --color-mint-soft: #e5f8ef;
+
+    --color-line: #f0e2d8;
+
+    --radius-card: 1.75rem;
+    --radius-pill: 999px;
+
+    --shadow-soft: 0 18px 45px -25px rgba(43, 45, 66, 0.28);
+    --shadow-lift: 0 26px 60px -30px rgba(43, 45, 66, 0.38);
+
+    --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background-color: var(--color-cream);
+        color: var(--color-ink);
+        font-family: var(--font-sans);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+
+    ::selection {
+        background-color: var(--color-lilac-soft);
+        color: var(--color-ink);
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-lilac);
+        outline-offset: 3px;
+        border-radius: 6px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+}
+
+@layer components {
+    .shell {
+        @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+    }
+
+    .surface {
+        @apply rounded-card border border-line bg-white/80 shadow-soft backdrop-blur-sm;
+    }
+
+    .surface-muted {
+        @apply rounded-card border border-line bg-cream-deep/60;
+    }
+
+    .btn,
+    .btn-primary,
+    .btn-secondary,
+    .btn-ghost {
+        @apply inline-flex items-center justify-center gap-2 rounded-pill px-6 py-3 text-sm font-semibold
+            transition-all duration-300 ease-soft select-none;
+    }
+
+    .btn-primary {
+        @apply bg-ink text-cream shadow-soft hover:-translate-y-0.5 hover:bg-ink/90 hover:shadow-lift
+            active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0;
+    }
+
+    .btn-secondary {
+        @apply border border-line bg-white text-ink hover:-translate-y-0.5 hover:border-lilac/60
+            hover:bg-lilac-soft/60 hover:shadow-soft active:translate-y-0;
+    }
+
+    .btn-ghost {
+        @apply text-ink-soft hover:bg-white/70 hover:text-ink;
+    }
+
+    .nav-link {
+        @apply rounded-pill px-4 py-2 text-sm font-medium text-ink-soft transition-colors duration-200
+            hover:bg-white/70 hover:text-ink;
+    }
+
+    .nav-link-active {
+        @apply bg-white text-ink shadow-soft;
+    }
+
+    .eyebrow {
+        @apply inline-flex items-center gap-2 rounded-pill border border-line bg-white/70 px-4 py-1.5
+            text-[0.7rem] font-semibold tracking-[0.18em] text-ink-muted uppercase;
+    }
+
+    .heading-xl {
+        @apply text-4xl leading-tight font-semibold tracking-tight text-ink sm:text-5xl;
+    }
+
+    .heading-lg {
+        @apply text-2xl leading-snug font-semibold tracking-tight text-ink sm:text-3xl;
+    }
+
+    .heading-md {
+        @apply text-lg font-semibold text-ink sm:text-xl;
+    }
+
+    .prose-soft {
+        @apply text-[0.95rem] leading-relaxed text-ink-soft;
+    }
+
+    .field {
+        @apply w-full rounded-2xl border border-line bg-white px-4 py-3 text-sm text-ink
+            transition-colors duration-200 placeholder:text-ink-muted/70 focus:border-lilac focus:outline-none;
+    }
+
+    .field-label {
+        @apply mb-2 block text-sm font-medium text-ink;
+    }
+
+    .field-hint {
+        @apply mt-1.5 text-xs text-ink-muted;
+    }
+
+    .field-error {
+        @apply mt-1.5 text-xs font-medium text-rose-500;
+    }
+
+    .chip,
+    .chip-lilac,
+    .chip-blush,
+    .chip-sky,
+    .chip-mint {
+        @apply inline-flex items-center gap-1.5 rounded-pill px-3 py-1 text-xs font-medium;
+    }
+
+    .chip-lilac {
+        @apply bg-lilac-soft text-ink;
+    }
+
+    .chip-blush {
+        @apply bg-blush-soft text-ink;
+    }
+
+    .chip-sky {
+        @apply bg-sky-soft text-ink;
+    }
+
+    .chip-mint {
+        @apply bg-mint-soft text-ink;
+    }
+
+    .stat-card {
+        @apply rounded-card border border-line bg-cream-deep/60 p-5 transition-colors duration-300
+            hover:border-lilac/50 hover:bg-white/70;
+    }
+}
+
+@layer utilities {
+    .animate-rise {
+        animation: rise 0.6s var(--ease-soft) both;
+    }
+
+    .animate-fade {
+        animation: fade 0.4s var(--ease-soft) both;
+    }
+}
+
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
